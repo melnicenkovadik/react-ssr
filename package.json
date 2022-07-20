@@ -1,0 +1,53 @@
+{
+  "name": "parcel-react-ssr",
+  "version": "0.4.0",
+  "description": "Example of SSR with React and ParcelJS",
+  "main": "index.js",
+  "keywords": [
+    "parcel",
+    "react",
+    "ssr"
+  ],
+  "author": "Vadym Melnychenko <melnicenkovadik@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel app/index.html",
+    "build": "rimraf dist && npm run build-imported && npm run build-client && npm run build-server && npm run build-server-stream",
+    "build-imported": "imported-components app app/imported-chunk.js",
+    "build-client": "cross-env BABEL_ENV=client parcel build app/index.html -d dist/client --public-url /dist --no-minify --no-cache",
+    "build-server": "cross-env BABEL_ENV=server parcel build server/index.js -d dist/server --public-url /dist --target=node --no-minify  --no-cache",
+    "build-server-stream": "cross-env BABEL_ENV=server parcel build stream-server/index.js -d dist/server-stream --public-url /dist --target=node --no-minify  --no-cache",
+    "start": "node dist/server",
+    "start:stream": "node dist/server-stream"
+  },
+  "alias": {
+    "react": "./node_modules/react",
+    "react-dom": "./node_modules/react-dom"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "multistream": "^4.0.0",
+    "parcel-plugin-bundle-manifest": "^0.2.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1",
+    "react-imported-component": "^6.2.1",
+    "react-router-dom": "^4.2.2",
+    "used-styles": "^1.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.8.3",
+    "@babel/preset-env": "7.8.4",
+    "@babel/preset-react": "7.8.3",
+    "cross-env": "^7.0.0",
+    "node-sass": "^4.13.1",
+    "parcel-bundler": "^1.12.4",
+    "react-hot-loader": "^4.12.19",
+    "rimraf": "^3.0.2"
+  }
+}
